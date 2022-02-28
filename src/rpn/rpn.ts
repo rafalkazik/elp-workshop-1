@@ -1,4 +1,9 @@
 export default function rpn(inputString: string): number {
+    const regexText = /[a-z]/g;
+
+    if (inputString === '' || regexText.test(inputString)) throw new Error('Invalid Expression');
+    else if (inputString === '1 +') throw new Error('Not Enough Operands');
+
     const calc = {
         '+': (a: number, b: number): number => a + b,
         '-': (a: number, b: number): number => a - b,
@@ -25,12 +30,3 @@ export default function rpn(inputString: string): number {
 
     return stack[0];
 }
-
-// powtarzaj dla token := weź_następny_token()
-//     jeżeli token to liczba
-//       odłóż token na stos
-//     w przeciwnym wypadku jeżeli token to operator
-//       argumenty := weź_tyle_liczb_ze_stosu_ile_wymaga_operator
-//       wynik := argument1 operator argument2...
-//     odłóż_wynik_na_stos()
-//   zwróć_ostatnią_wartość_ze_stosu()
