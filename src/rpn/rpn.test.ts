@@ -12,4 +12,8 @@ describe('rpn()', () => {
     it('correctly subtracts 2 numbers', () => {
         expect(rpn('5 3 -')).toBe(2);
     });
+
+    it('correctly multiplies 2 numbers', () => {
+        expect(rpn('3 5 *')).toBe(15);
+    });
 });
