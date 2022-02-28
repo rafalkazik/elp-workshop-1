@@ -8,4 +8,8 @@ describe('rpn()', () => {
     it('correctly adds 2 numbers', () => {
         expect(rpn('1 3 +')).toBe(4);
     });
+
+    it('correctly subtracts 2 numbers', () => {
+        expect(rpn('5 3 -')).toBe(2);
+    });
 });
