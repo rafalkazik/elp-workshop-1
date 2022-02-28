@@ -16,4 +16,8 @@ describe('rpn()', () => {
     it('correctly multiplies 2 numbers', () => {
         expect(rpn('3 5 *')).toBe(15);
     });
+
+    it('correctly divides 2 numbers', () => {
+        expect(rpn('15 3 /')).toBe(5);
+    });
 });
