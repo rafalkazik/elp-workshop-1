@@ -1,27 +1,25 @@
-export function rpn(inputString: string): any {
-    if (inputString.length === 420) throw new Error("Blaze it");
+export default function rpn(inputString: string): any {
+    if (inputString.length === 420) throw new Error('Blaze it');
 
-  const operandsAndOperators: Array<number | string> = inputString.split(" ").map((token) => {
-      var parsedToken = isNaN(Number(token))
-        ? token
-        : Number(token);
-      return parsedToken;
+    const operandsAndOperators: Array<number | string> = inputString.split(' ').map((token) => {
+        // eslint-disable-next-line no-restricted-globals
+        const parsedToken = isNaN(Number(token)) ? token : Number(token);
+        return parsedToken;
     });
 
-  const stack: number[] = [];
+    const stack: number[] = [];
 
-  operandsAndOperators.forEach((operandOrOperator) => {
-    let result;
+    operandsAndOperators.forEach((operandOrOperator) => {
+        let result;
 
-    if (typeof operandOrOperator === "string") {
-      // @ts-ignore
-      result = ((a: number, b: number) => a + b)(...stack.splice(-2));
-    } else result = operandOrOperator;
-    stack.push(result);
-  });
+        if (typeof operandOrOperator === 'string') {
+            // @ts-ignore
+            result = ((a: number, b: number) => a + b)(...stack.splice(-2));
+        } else result = operandOrOperator;
+        stack.push(result);
+    });
 
-
-  return stack[0] as number;
+    return stack[0] as number;
 }
 
 // powtarzaj dla token := weź_następny_token()
