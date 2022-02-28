@@ -1,4 +1,11 @@
 export default function rpn(inputString: string): number {
+    const calc = {
+        '+': (a: number, b: number): number => a + b,
+        '-': (a: number, b: number): number => a - b,
+        '*': (a: number, b: number): number => a * b,
+        '/': (a: number, b: number): number => a / b,
+    };
+
     const operandsAndOperators: Array<number | string> = inputString.split(' ').map((token) => {
         // eslint-disable-next-line no-restricted-globals
         const parsedToken = isNaN(Number(token)) ? token : Number(token);
@@ -11,7 +18,7 @@ export default function rpn(inputString: string): number {
         let result: number;
 
         if (typeof operandOrOperator === 'string') {
-            result = ((a: number, b: number) => a + b)(...(stack.splice(-2) as [number, number]));
+            result = calc[operandOrOperator as keyof typeof calc](...(stack.splice(-2) as [number, number]));
         } else result = operandOrOperator;
         stack.push(result);
     });
