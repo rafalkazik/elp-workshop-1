@@ -1,4 +1,4 @@
-export default function rpn(inputString: string): any {
+export default function rpn(inputString: string): number {
     const operandsAndOperators: Array<number | string> = inputString.split(' ').map((token) => {
         // eslint-disable-next-line no-restricted-globals
         const parsedToken = isNaN(Number(token)) ? token : Number(token);
@@ -8,16 +8,15 @@ export default function rpn(inputString: string): any {
     const stack: number[] = [];
 
     operandsAndOperators.forEach((operandOrOperator) => {
-        let result;
+        let result: number;
 
         if (typeof operandOrOperator === 'string') {
-            // @ts-ignore
-            result = ((a: number, b: number) => a + b)(...stack.splice(-2));
+            result = ((a: number, b: number) => a + b)(...(stack.splice(-2) as [number, number]));
         } else result = operandOrOperator;
         stack.push(result);
     });
 
-    return stack[0] as number;
+    return stack[0];
 }
 
 // powtarzaj dla token := weź_następny_token()
